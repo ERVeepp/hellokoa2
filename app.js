@@ -9,7 +9,8 @@ const index = require('./routes/index')
 const users = require('./routes/users')
 const api = require('./routes/api')
 const router = require('koa-router')()
-const response_formatter = require('./middlewares/response_formatter');
+const response_formatter = require('./middlewares/response_formatter')
+const hero = require('./router/hero')
 // error handler
 onerror(app)
 
@@ -36,6 +37,7 @@ app.use(async (ctx, next) => {
 router.use('/', index.routes(), index.allowedMethods());
 router.use('/users', users.routes(), users.allowedMethods());
 router.use('/api', api.routes(), api.allowedMethods());
+router.use('/newapi', hero.routes(), hero.allowedMethods())
 
 //添加格式化处理响应结果的中间件，在添加路由之前调用
 //仅对/api开头的url进行格式化处理
